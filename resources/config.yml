@@ -1,0 +1,21 @@
+
+# If could not get the country for the player (e.g. internal network).
+# Set to true to broadcast the join message anyway.
+# Set to false for no join message.
+broadcastOnUnknownCountry: true
+
+# If could not get the country for the player and the broadcastOnUnknownCountry is set to true. 
+# Set to true to broadcast the join message without the country version.
+# Set to false to broadcast the normal join message using the 'unknown' country name.
+broadcastAltJoinMsgOnUnknownCountry: true
+
+# The messages file to use.
+# See in the 'messages' folder for available cultures in the filenames: messages/messages.<culture>.yml
+messages-culture: "en-US"
+
+# The country names file to use.
+# See in the 'countrynames' folder for available cultures in the filenames: countrynames/countrynames.<culture>.yml
+countrynames-culture: "en-US"
+
+# Spam the console with useful information for error reporting. Should be disabled on production environment.
+debug: false

@@ -1,0 +1,5 @@
+name: CountryOnJoin
+main: sososlik.countryonjoin.Plugin
+version: 1.0.0
+author: "Sososlik (sososlik@outlook.com)"
+description: "Mentions the country from wich the player joins the game."

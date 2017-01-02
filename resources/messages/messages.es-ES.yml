@@ -1,0 +1,16 @@
+# Within a message, a pair of single quotes can be used to quote any arbitrary characters except single quotes.
+# For example, "'{0}'" represents the literal text "{0}", and will not be replaced.
+# A single quote itself must be represented by doubled single quotes ''.
+# For example, "'{''}'" is interpreted as a sequence of '{ (start of quoting and a left curly brace), '' (a single quote), and }' (a right curly brace and end of quoting), not '{' and '}' (quoted left and right curly braces): representing the liteal text "{'}", not "{}".
+# Any unmatched quote is treated as closed at the end. For example, "'{0}" is treated as "'{0}'".
+# Any curly braces within an unquoted pattern must be balanced.
+# For example, "ab {0} de" and "ab '}' de" are valid patterns, but "ab {0'}' de", "ab } de" and "''{''" are not.
+
+# Broadcast message when a player joins the network (with country).
+# {0} is the player name
+# {1} is the country name
+joinWithCountry: "&e{0}&r&e se conectó desde &c{1}&r&e."
+
+# Broadcast message when a player joins the network (without country).
+# {0} is the player name
+joinWithoutCountry: "&e{0}&r&e se conectó."
