@@ -9,8 +9,8 @@
 # Broadcast message when a player joins the network (with country).
 # {0} is the player name
 # {1} is the country name
-joinWithCountry: "&e{0}&r&e joined from &c{1}&r&e."
+joinWithCountry: "&e{0}&r&e joined from &c{1}&r&e"
 
 # Broadcast message when a player joins the network (without country).
 # {0} is the player name
-joinWithoutCountry: "&e{0}&r&e joined."
+joinWithoutCountry: "&e{0}&r&e joined"

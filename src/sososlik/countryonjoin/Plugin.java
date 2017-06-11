@@ -60,11 +60,10 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 			{
 				this.getLogger().severe("Error creating the plugin data directory \"" + dataDir.getAbsolutePath() + "\".");
 				e.printStackTrace();
+				return;
 			}
 		}
 		
-		
-		//TODO: implement config file VERSIONS for future changes
 		
 		File configFile = new File(dataDir, CONFIG_FILENAME);
 				
@@ -77,13 +76,11 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 			{
 				this.getLogger().severe("Error extracting the file \"" + CONFIG_FILENAME +"\" to \"" + configFile.getAbsolutePath() + "\".");
 				e.printStackTrace();
+				return;
 			}
 		}
 		
-		
-		//TODO: implement VERSIONS for the messages and countrynames files and update then if in the resource is newer
-		//TODO: maybe check for "CUSTOM" version for not overwriting the users changes
-		
+
 		File messagesBaseDir = new File(dataDir, MESSAGES_BASEDIR);
 		
 		if(!messagesBaseDir.exists())
@@ -96,6 +93,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 			{
 				this.getLogger().severe("Error creating " + messagesBaseDir.getAbsolutePath() + " directory.");
 				e.printStackTrace();
+				return;
 			}
 		}
 		
@@ -123,7 +121,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 	        		catch (Exception e)
 	        		{
 	        			this.getLogger().severe("Error extracting the file \"" + MESSAGES_BASEDIR + "/" + f.getName() + "\" to \"" + f.getAbsolutePath() + "\".");
-	    				e.printStackTrace();
+	    				throw e;
 	        		}
 	        	}
 	        }
@@ -132,6 +130,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 		{
 			this.getLogger().severe("Error extracting the directory \"" + MESSAGES_BASEDIR + "\" to \"" + messagesBaseDir.getAbsolutePath() + "\".");
 			e.printStackTrace();
+			return;
 		}
 		
 		
@@ -147,6 +146,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 			{
 				this.getLogger().severe("Error creating " + countrynamesBaseDir.getAbsolutePath() + " directory.");
 				e.printStackTrace();
+				return;
 			}
 		}
 		
@@ -174,7 +174,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 	        		catch (Exception e)
 	        		{
 	        			this.getLogger().severe("Error extracting the file \"" + COUNTRYNAMES_BASEDIR + "/" + f.getName() + "\" to \"" + f.getAbsolutePath() + "\".");
-	    				e.printStackTrace();
+	    				throw e;
 	        		}
 	        	}
 	        }
@@ -183,6 +183,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 		{
 			this.getLogger().severe("Error extracting the directory \"" + COUNTRYNAMES_BASEDIR + "\" to \"" + countrynamesBaseDir.getAbsolutePath() + "\".");
 			e.printStackTrace();
+			return;
 		}
 		
 		
@@ -198,12 +199,11 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 			{
 				this.getLogger().severe("Error extracting the file \"" + GEOIP_DB_FILENAME + "\" to \"" + geoipdbFile.getAbsolutePath() + "\".");
 				e.printStackTrace();
+				return;
 			}
 		}
 		
-		//TODO: update the GeoIP db file if in the resource is newer
-		
-		
+
 		File readmeFile = new File(dataDir, README_FILENAME);
 		
 		if(!readmeFile.exists())
@@ -216,11 +216,13 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 			{
 				this.getLogger().severe("Error extracting the file \"" + README_FILENAME + "\" to \"" + readmeFile.getAbsolutePath() + "\".");
 				e.printStackTrace();
+				return;
+				//the README file is critical because legal reasons (maxmind's license requires to mention their website in the product)
 			}
 		}
 		
 		
-		this.reload();
+		this.reload(); //the first time it means 'load' and if fail should not disable the plugin
 
 		
 		this.getProxy().getPluginManager().registerListener(this, new Listener());
@@ -230,6 +232,8 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 	
 	public void reload()
 	{
+		//means 'load' on first time call 
+		//NOTE: don't disable the plugin here, user can edit the config/message files and use 'reload' command for resolve the problem
 				
 		File dataDir = this.getDataFolder();
 		
@@ -308,7 +312,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin
 			}
 			catch (IOException e) 
 			{
-				// TODO Auto-generated catch block
+				this.getLogger().severe("Error closing the " + geoipdbFile.getName() + " file.");
 				e.printStackTrace();
 			}
 		}

@@ -9,8 +9,8 @@
 # Broadcast message when a player joins the network (with country).
 # {0} is the player name
 # {1} is the country name
-joinWithCountry: "&e{0}&r&e подключился из &c{1}&r&e"
+joinWithCountry: "&r&e来自 &c{1} &r&e的 &e{0} &r&e加入了游戏"
 
 # Broadcast message when a player joins the network (without country).
 # {0} is the player name
-joinWithoutCountry: "&e{0}&r&e подключился"
+joinWithoutCountry: "&e{0}&r&e 加入了游戏"
